@@ -71,6 +71,8 @@
   const viewHome      = document.getElementById('view-home');
   const viewCourses   = document.getElementById('view-courses');
   const viewProject1  = document.getElementById('view-project1');
+  const viewMemorial  = document.getElementById('view-memorial');
+  const homeMemorialBanner = document.getElementById('homeMemorialBanner');
   const searchNotice  = document.getElementById('search-notice');
   const searchQuery   = document.getElementById('search-query');
   const clearSearch   = document.getElementById('clear-search');
@@ -145,6 +147,7 @@
     viewHome.classList.add('active');
     viewCourses.classList.remove('active');
     viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
     setActiveNav('home');
     searchInput.value = '';
     hideSearchNotice();
@@ -157,7 +160,21 @@
     viewHome.classList.remove('active');
     viewCourses.classList.remove('active');
     viewProject1.classList.add('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
     setActiveNav('project1');
+    searchInput.value = '';
+    hideSearchNotice();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) closeSidebar();
+  }
+
+  function showMemorial() {
+    currentView = 'memorial';
+    viewHome.classList.remove('active');
+    viewCourses.classList.remove('active');
+    viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.add('active');
+    setActiveNav('memorial');
     searchInput.value = '';
     hideSearchNotice();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -173,6 +190,7 @@
     currentView = spec;
     viewHome.classList.remove('active');
     viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
     viewCourses.classList.add('active');
     setActiveNav(spec);
 
@@ -205,11 +223,16 @@
   navItems.forEach(btn => {
     btn.addEventListener('click', () => {
       const v = btn.dataset.view;
-      if (v === 'home')     showHome();
+      if (v === 'home')          showHome();
       else if (v === 'project1') showProject1();
+      else if (v === 'memorial') showMemorial();
       else showSpec(v);
     });
   });
+
+  if (homeMemorialBanner) {
+    homeMemorialBanner.addEventListener('click', showMemorial);
+  }
 
   // Quick spec cards on home page
   document.querySelectorAll('.spec-quick-card').forEach(btn => {
@@ -279,6 +302,8 @@
         showHome();
       } else if (currentView === 'project1') {
         showProject1();
+      } else if (currentView === 'memorial') {
+        showMemorial();
       } else {
         showAllCards();
         showSpec(currentView);
@@ -289,6 +314,7 @@
     // Switch to courses view, show all sections
     viewHome.classList.remove('active');
     viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
     viewCourses.classList.add('active');
     document.querySelectorAll('.course-section').forEach(s => s.classList.remove('hidden'));
     setActiveNav('');
