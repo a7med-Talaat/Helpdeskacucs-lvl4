@@ -38,7 +38,7 @@ const subjects = {
       emoji: "🥽",
       desc: "Concepts and technologies behind virtual and augmented reality — including 3D rendering, immersive environments, VR frameworks, and real-world applications.",
       tags: ["3D", "Immersive", "VR/AR"],
-      drive: "https://drive.google.com/drive/folders/165G0SaJjIOC8QYcKHaSF7Vlj4ar3loBP?usp=drive_link"
+      drive: "https://drive.google.com/drive/folders/1G3NPo1lLXTkR89upNWq-i-JM60Px2nJz?usp=drive_link"
     },
     {
       name: "Computer Graphics 2",
@@ -113,9 +113,9 @@ const subjects = {
     },
     {
       name: "New Trends in AI",
-      emoji: "🥽",
-      desc: "VR/AR technologies, 3D interaction models, immersive AI environments, and real-world applications of virtual reality in intelligent systems.",
-      tags: ["VR/AR", "3D", "Immersive AI"],
+      emoji: "🤖",
+      desc: "Exploring the latest advancements in artificial intelligence — including generative AI, large language models, autonomous systems, explainable AI, and emerging AI applications.",
+      tags: ["Generative AI", "LLMs", "Emerging Tech"],
       drive: "https://drive.google.com/drive/folders/165G0SaJjIOC8QYcKHaSF7Vlj4ar3loBP?usp=drive_link"
     },
     {
