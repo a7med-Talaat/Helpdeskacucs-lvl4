@@ -112,7 +112,7 @@ const subjects = {
       drive: "https://drive.google.com/drive/folders/1WkJPh_7QxSHhLBMa2F7yxaNq20VtJYkr?usp=drive_link"
     },
     {
-      name: "Virtual Reality",
+      name: "New Trends in AI",
       emoji: "🥽",
       desc: "VR/AR technologies, 3D interaction models, immersive AI environments, and real-world applications of virtual reality in intelligent systems.",
       tags: ["VR/AR", "3D", "Immersive AI"],
