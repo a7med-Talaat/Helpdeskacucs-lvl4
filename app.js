@@ -72,6 +72,7 @@
   const viewCourses   = document.getElementById('view-courses');
   const viewProject1  = document.getElementById('view-project1');
   const viewMemorial  = document.getElementById('view-memorial');
+  const viewEnglish   = document.getElementById('view-english');
   const homeMemorialBanner = document.getElementById('homeMemorialBanner');
   const searchNotice  = document.getElementById('search-notice');
   const searchQuery   = document.getElementById('search-query');
@@ -148,6 +149,7 @@
     viewCourses.classList.remove('active');
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
     setActiveNav('home');
     searchInput.value = '';
     hideSearchNotice();
@@ -161,6 +163,7 @@
     viewCourses.classList.remove('active');
     viewProject1.classList.add('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
     setActiveNav('project1');
     searchInput.value = '';
     hideSearchNotice();
@@ -174,7 +177,22 @@
     viewCourses.classList.remove('active');
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.add('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
     setActiveNav('memorial');
+    searchInput.value = '';
+    hideSearchNotice();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) closeSidebar();
+  }
+
+  function showEnglish() {
+    currentView = 'english';
+    viewHome.classList.remove('active');
+    viewCourses.classList.remove('active');
+    viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.add('active');
+    setActiveNav('english');
     searchInput.value = '';
     hideSearchNotice();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -191,6 +209,7 @@
     viewHome.classList.remove('active');
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
     viewCourses.classList.add('active');
     setActiveNav(spec);
 
@@ -226,6 +245,7 @@
       if (v === 'home')          showHome();
       else if (v === 'project1') showProject1();
       else if (v === 'memorial') showMemorial();
+      else if (v === 'english')  showEnglish();
       else showSpec(v);
     });
   });
@@ -304,6 +324,8 @@
         showProject1();
       } else if (currentView === 'memorial') {
         showMemorial();
+      } else if (currentView === 'english') {
+        showEnglish();
       } else {
         showAllCards();
         showSpec(currentView);
@@ -315,6 +337,7 @@
     viewHome.classList.remove('active');
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
     viewCourses.classList.add('active');
     document.querySelectorAll('.course-section').forEach(s => s.classList.remove('hidden'));
     setActiveNav('');
