@@ -518,8 +518,8 @@
       data.exams.forEach((item, i) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="tt-idx">0${i + 1}</td>
-          <td>
+          <td class="tt-idx-cell"><span class="tt-idx">0${i + 1}</span></td>
+          <td class="tt-date-cell">
             <div class="tt-date-group">
               <span class="tt-date-icon">${ICONS_SVG.calendar}</span>
               <div>
@@ -531,7 +531,7 @@
           <td class="tt-course-cell">
             <span class="tt-course-title">${item.course}</span>
           </td>
-          <td style="text-align: center;">
+          <td class="tt-time-cell">
             <span class="tt-time-badge">
               ${ICONS_SVG.clock}${item.time}
             </span>

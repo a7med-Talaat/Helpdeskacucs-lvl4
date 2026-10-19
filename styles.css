@@ -750,6 +750,20 @@ body {
   color: #ffffff;
 }
 
+@media (max-width: 600px) {
+  .home-memorial-banner,
+  .home-midterm-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .home-memorial-banner .hmb-btn,
+  .home-midterm-banner .hmb-btn-midterm {
+    align-self: flex-start;
+  }
+}
+
 /* ─── MEMORIAL PAGE HERO ─────────────────────────────────── */
 .memorial-hero {
   background: var(--dua-bg);
@@ -1573,6 +1587,19 @@ body {
   color: var(--muted);
 }
 
+.tt-table th.th-idx {
+  width: 50px;
+}
+
+.tt-table th.th-date {
+  min-width: 160px;
+}
+
+.tt-table th.th-time {
+  width: 170px;
+  text-align: center;
+}
+
 .tt-table tbody tr {
   border-bottom: 1px solid var(--border2);
   transition: background var(--ease);
@@ -1730,7 +1757,285 @@ body {
   color: #10b981;
 }
 
-/* ─── Image Export Mode (Clean 1000px light card) ─── */
+/* ─── Breadcrumb in Topbar (midterm.html) ─── */
+.topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tbb-label {
+  color: var(--muted);
+}
+
+.tbb-sep {
+  color: var(--border);
+}
+
+.tbb-curr {
+  color: var(--text);
+  font-weight: 650;
+}
+
+/* ─── MOBILE RESPONSIVE STYLES (No pinch/zoom needed) ─── */
+@media (max-width: 720px) {
+  .page-content {
+    padding: 14px 10px 48px;
+  }
+
+  .tt-container {
+    gap: 14px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tt-hero-header {
+    padding: 14px 12px;
+    border-radius: var(--r-lg);
+    gap: 12px;
+  }
+
+  .tt-hero-top {
+    gap: 12px;
+  }
+
+  .tt-brand-group {
+    gap: 10px;
+  }
+
+  .tt-brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: var(--r-sm);
+  }
+
+  .tt-brand-title {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .tt-brand-sub {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .tt-actions-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .tt-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .tt-nav-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 5px;
+    border-radius: var(--r-md);
+  }
+
+  .tt-tab-btn {
+    min-width: 0;
+    width: 100%;
+    padding: 8px 6px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .tt-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .tt-stat-card {
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+  }
+
+  .tt-stat-lbl {
+    font-size: 10px;
+  }
+
+  .tt-stat-val {
+    font-size: 14.5px;
+  }
+
+  .tt-card {
+    padding: 14px 12px;
+    border-radius: var(--r-lg);
+  }
+
+  .tt-card-header {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    gap: 10px;
+  }
+
+  .tt-card-title {
+    font-size: 16.5px;
+    line-height: 1.3;
+  }
+
+  .tt-card-sub {
+    font-size: 11.5px;
+  }
+
+  .tt-card-meta {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tt-slot-info {
+    font-size: 11px;
+  }
+
+  /* ── Mobile Card-based Table (100% full-width, zero horizontal scroll) ── */
+  .tt-table-wrap {
+    overflow: visible;
+    border: none;
+    background: transparent;
+  }
+
+  .tt-table {
+    display: block;
+    width: 100%;
+  }
+
+  .tt-table thead {
+    display: none;
+  }
+
+  .tt-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .tt-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 13px 14px;
+    position: relative;
+    box-shadow: var(--sh-sm);
+  }
+
+  .tt-table td {
+    display: block;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .tt-idx-cell {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .tt-idx {
+    display: inline-block;
+    padding: 2px 7px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .tt-course-cell {
+    order: 1;
+    padding-right: 38px !important;
+  }
+
+  .tt-course-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text);
+    display: block;
+  }
+
+  .tt-date-cell {
+    order: 2;
+    margin-top: 1px;
+  }
+
+  .tt-date-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tt-date-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: var(--r-sm);
+  }
+
+  .tt-date-val {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .tt-date-day {
+    font-size: 11.5px;
+    color: var(--text2);
+  }
+
+  .tt-time-cell {
+    order: 3;
+    padding-top: 8px !important;
+    margin-top: 2px;
+    border-top: 1px dashed var(--border) !important;
+    width: 100%;
+  }
+
+  .tt-time-badge {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 650;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+  }
+
+  .tt-card-footer {
+    margin-top: 16px;
+    padding-top: 14px;
+    font-size: 11px;
+    gap: 8px;
+  }
+}
+
+/* ─── Image Export Mode (Clean 1000px light card on all devices) ─── */
 .exporting {
   width: 1000px !important;
   max-width: 1000px !important;
@@ -1743,17 +2048,82 @@ body {
   color: #0f172a !important;
 }
 
-.exporting .overflow-x-auto,
 .exporting .tt-table-wrap {
   overflow: visible !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: var(--r-lg) !important;
+  background: #ffffff !important;
 }
 
-.exporting td, .exporting th {
+.exporting .tt-table {
+  display: table !important;
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+.exporting .tt-table thead {
+  display: table-header-group !important;
+}
+
+.exporting .tt-table thead tr {
+  display: table-row !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.exporting .tt-table th {
+  display: table-cell !important;
+  padding: 12px 18px !important;
+  color: #64748b !important;
+  font-size: 11px !important;
   white-space: nowrap !important;
 }
 
-.exporting td.tt-course-cell {
+.exporting .tt-table tbody {
+  display: table-row-group !important;
+}
+
+.exporting .tt-table tbody tr {
+  display: table-row !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 0 !important;
+  position: static !important;
+  box-shadow: none !important;
+}
+
+.exporting .tt-table td {
+  display: table-cell !important;
+  position: static !important;
+  padding: 16px 18px !important;
+  border: none !important;
+  background: transparent !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}
+
+.exporting .tt-idx-cell {
+  position: static !important;
+  width: 50px !important;
+}
+
+.exporting .tt-course-cell {
+  padding-right: 18px !important;
   white-space: normal !important;
+}
+
+.exporting .tt-time-cell {
+  width: 170px !important;
+  padding-top: 16px !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+  text-align: center !important;
+}
+
+.exporting .tt-time-badge {
+  width: auto !important;
+  display: inline-flex !important;
 }
 
 /* ─── Print Styles ─── */
@@ -1778,6 +2148,64 @@ body {
     padding: 24px !important;
     width: 100% !important;
     max-width: 100% !important;
+  }
+  .tt-table-wrap {
+    overflow: visible !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #fff !important;
+  }
+  .tt-table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+  .tt-table thead {
+    display: table-header-group !important;
+  }
+  .tt-table thead tr {
+    display: table-row !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  .tt-table th {
+    display: table-cell !important;
+    padding: 10px 14px !important;
+  }
+  .tt-table tbody {
+    display: table-row-group !important;
+  }
+  .tt-table tbody tr {
+    display: table-row !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    position: static !important;
+    box-shadow: none !important;
+  }
+  .tt-table td {
+    display: table-cell !important;
+    padding: 12px 14px !important;
+    position: static !important;
+    border: none !important;
+    vertical-align: middle !important;
+  }
+  .tt-idx-cell {
+    position: static !important;
+    width: 40px !important;
+  }
+  .tt-course-cell {
+    padding-right: 14px !important;
+  }
+  .tt-time-cell {
+    width: 160px !important;
+    border-top: none !important;
+    padding-top: 12px !important;
+    margin-top: 0 !important;
+    text-align: center !important;
+  }
+  .tt-time-badge {
+    width: auto !important;
+    display: inline-flex !important;
   }
   @page {
     margin: 1.2cm;
