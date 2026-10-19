@@ -73,7 +73,9 @@
   const viewProject1  = document.getElementById('view-project1');
   const viewMemorial  = document.getElementById('view-memorial');
   const viewEnglish   = document.getElementById('view-english');
+  const viewMidterm   = document.getElementById('view-midterm');
   const homeMemorialBanner = document.getElementById('homeMemorialBanner');
+  const homeMidtermBanner  = document.getElementById('homeMidtermBanner');
   const searchNotice  = document.getElementById('search-notice');
   const searchQuery   = document.getElementById('search-query');
   const clearSearch   = document.getElementById('clear-search');
@@ -150,7 +152,23 @@
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
     if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     setActiveNav('home');
+    searchInput.value = '';
+    hideSearchNotice();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.innerWidth <= 900) closeSidebar();
+  }
+
+  function showMidterm() {
+    currentView = 'midterm';
+    viewHome.classList.remove('active');
+    viewCourses.classList.remove('active');
+    viewProject1.classList.remove('active');
+    if (viewMemorial) viewMemorial.classList.remove('active');
+    if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.add('active');
+    setActiveNav('midterm');
     searchInput.value = '';
     hideSearchNotice();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -164,6 +182,7 @@
     viewProject1.classList.add('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
     if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     setActiveNav('project1');
     searchInput.value = '';
     hideSearchNotice();
@@ -178,6 +197,7 @@
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.add('active');
     if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     setActiveNav('memorial');
     searchInput.value = '';
     hideSearchNotice();
@@ -192,6 +212,7 @@
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
     if (viewEnglish)  viewEnglish.classList.add('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     setActiveNav('english');
     searchInput.value = '';
     hideSearchNotice();
@@ -210,6 +231,7 @@
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
     if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     viewCourses.classList.add('active');
     setActiveNav(spec);
 
@@ -242,7 +264,9 @@
   navItems.forEach(btn => {
     btn.addEventListener('click', () => {
       const v = btn.dataset.view;
+      if (!v) return;
       if (v === 'home')          showHome();
+      else if (v === 'midterm')  showMidterm();
       else if (v === 'project1') showProject1();
       else if (v === 'memorial') showMemorial();
       else if (v === 'english')  showEnglish();
@@ -252,6 +276,10 @@
 
   if (homeMemorialBanner) {
     homeMemorialBanner.addEventListener('click', showMemorial);
+  }
+
+  if (homeMidtermBanner) {
+    homeMidtermBanner.addEventListener('click', showMidterm);
   }
 
   // Quick spec cards on home page
@@ -320,6 +348,8 @@
       hideSearchNotice();
       if (currentView === 'home') {
         showHome();
+      } else if (currentView === 'midterm') {
+        showMidterm();
       } else if (currentView === 'project1') {
         showProject1();
       } else if (currentView === 'memorial') {
@@ -338,6 +368,7 @@
     viewProject1.classList.remove('active');
     if (viewMemorial) viewMemorial.classList.remove('active');
     if (viewEnglish)  viewEnglish.classList.remove('active');
+    if (viewMidterm)  viewMidterm.classList.remove('active');
     viewCourses.classList.add('active');
     document.querySelectorAll('.course-section').forEach(s => s.classList.remove('hidden'));
     setActiveNav('');
@@ -384,9 +415,181 @@
   menuToggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
   backdrop.addEventListener('click', closeSidebar);
 
+  // ── Midterm Timetable Logic ───────────────────────────
+  const MIDTERM_SLOT = "1:00 PM – 2:00 PM";
+  const midtermSchedules = {
+    ai: {
+      key: 'ai',
+      headerName: "Ahram Canadian University (AI) Midterm Timetable",
+      badge: "AI Specialization",
+      badgeClass: "badge-ai-spec",
+      icon: "fa-solid fa-brain",
+      exams: [
+        { date: "02/11/2026", day: "Monday", course: "Machine Learning", time: MIDTERM_SLOT },
+        { date: "03/11/2026", day: "Tuesday", course: "Big Data", time: MIDTERM_SLOT },
+        { date: "05/11/2026", day: "Thursday", course: "Data Mining", time: MIDTERM_SLOT },
+        { date: "08/11/2026", day: "Sunday", course: "New Trends in AI", time: MIDTERM_SLOT },
+        { date: "09/11/2026", day: "Monday", course: "Speech and Image Processing", time: MIDTERM_SLOT }
+      ]
+    },
+    cs: {
+      key: 'cs',
+      headerName: "Ahram Canadian University (CS) Midterm Timetable",
+      badge: "CS Specialization",
+      badgeClass: "badge-cs-spec",
+      icon: "fa-solid fa-code",
+      exams: [
+        { date: "02/11/2026", day: "Monday", course: "Numerical Treatment", time: MIDTERM_SLOT },
+        { date: "03/11/2026", day: "Tuesday", course: "HCI", time: MIDTERM_SLOT },
+        { date: "04/11/2026", day: "Wednesday", course: "VR", time: MIDTERM_SLOT },
+        { date: "08/11/2026", day: "Sunday", course: "Graphics 2", time: MIDTERM_SLOT },
+        { date: "09/11/2026", day: "Monday", course: "Speech and Image Processing", time: MIDTERM_SLOT }
+      ]
+    },
+    swe: {
+      key: 'swe',
+      headerName: "Ahram Canadian University (SWE) Midterm Timetable",
+      badge: "SWE Specialization",
+      badgeClass: "badge-swe-spec",
+      icon: "fa-solid fa-layer-group",
+      exams: [
+        { date: "02/11/2026", day: "Monday", course: "Software Project Management", time: MIDTERM_SLOT },
+        { date: "03/11/2026", day: "Tuesday", course: "HCI", time: MIDTERM_SLOT },
+        { date: "04/11/2026", day: "Wednesday", course: "Data Warehousing and Data Integration", time: MIDTERM_SLOT },
+        { date: "08/11/2026", day: "Sunday", course: "SWE 2", time: MIDTERM_SLOT },
+        { date: "09/11/2026", day: "Monday", course: "Software Testing", time: MIDTERM_SLOT }
+      ]
+    },
+    cne: {
+      key: 'cne',
+      headerName: "Ahram Canadian University (CNE) Midterm Timetable",
+      badge: "CNE Specialization",
+      badgeClass: "badge-cne-spec",
+      icon: "fa-solid fa-network-wired",
+      exams: [
+        { date: "02/11/2026", day: "Monday", course: "New Trends in Computer Networks", time: MIDTERM_SLOT },
+        { date: "03/11/2026", day: "Tuesday", course: "Communications Technology", time: MIDTERM_SLOT },
+        { date: "04/11/2026", day: "Wednesday", course: "Internet of Things", time: MIDTERM_SLOT },
+        { date: "08/11/2026", day: "Sunday", course: "Networks 2", time: MIDTERM_SLOT },
+        { date: "09/11/2026", day: "Monday", course: "Cloud Computing", time: MIDTERM_SLOT }
+      ]
+    }
+  };
+
+  let activeMidtermTab = 'ai';
+
+  function switchMidtermTab(key) {
+    if (!midtermSchedules[key]) return;
+    activeMidtermTab = key;
+
+    document.querySelectorAll('.tt-tab-btn').forEach(btn => btn.classList.remove('active'));
+    const activeBtn = document.getElementById('tab-' + key);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    const data = midtermSchedules[key];
+    const deptTitle = document.getElementById('deptTitle');
+    if (deptTitle) deptTitle.textContent = data.headerName;
+
+    const badge = document.getElementById('versionBadge');
+    if (badge) {
+      badge.className = `tt-spec-badge ${data.badgeClass}`;
+      badge.innerHTML = `<i class="${data.icon}"></i><span>${data.badge}</span>`;
+    }
+
+    const tbody = document.getElementById('timetableBody');
+    if (tbody) {
+      tbody.innerHTML = '';
+      data.exams.forEach((item, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="tt-idx">0${i + 1}</td>
+          <td>
+            <div class="tt-date-group">
+              <span class="tt-date-icon"><i class="fa-regular fa-calendar"></i></span>
+              <div>
+                <span class="tt-date-val">${item.date}</span>
+                <span class="tt-date-day">(${item.day})</span>
+              </div>
+            </div>
+          </td>
+          <td class="tt-course-cell">
+            <span class="tt-course-title">${item.course}</span>
+          </td>
+          <td style="text-align: center;">
+            <span class="tt-time-badge">
+              <i class="fa-regular fa-clock"></i>${item.time}
+            </span>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+  }
+
+  // Toast
+  let toastTimer = null;
+  function showToast(text, isError = false) {
+    const toast = document.getElementById('toastMessage');
+    const toastText = document.getElementById('toastText');
+    if (!toast || !toastText) return;
+    const icon = toast.querySelector('i');
+    toastText.textContent = text;
+    if (isError) {
+      if (icon) { icon.className = 'fa-solid fa-circle-exclamation'; icon.style.color = '#f43f5e'; }
+    } else {
+      if (icon) { icon.className = 'fa-solid fa-circle-check'; icon.style.color = '#10b981'; }
+    }
+    toast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  // Download high-res timetable image
+  async function downloadMidtermImage() {
+    const card = document.getElementById('timetableCard');
+    if (!card) return;
+    showToast('Generating high-resolution image...');
+    try {
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      if (typeof html2canvas === 'undefined') {
+        showToast('Image library loading...', true);
+        return;
+      }
+      const canvas = await html2canvas(card, {
+        scale: 3,
+        backgroundColor: '#ffffff',
+        useCORS: true,
+        windowWidth: 1100,
+        onclone: (doc) => {
+          doc.documentElement.setAttribute('data-theme', 'light');
+          const c = doc.getElementById('timetableCard');
+          if (c) c.classList.add('exporting');
+          doc.querySelectorAll('.no-print').forEach(el => el.remove());
+        }
+      });
+      const link = document.createElement('a');
+      link.download = `ACU-${activeMidtermTab.toUpperCase()}-Midterm-Timetable.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('Image downloaded successfully!');
+    } catch (err) {
+      showToast('Error generating image', true);
+    }
+  }
+
+  window.switchMidtermTab = switchMidtermTab;
+  window.downloadMidtermImage = downloadMidtermImage;
+
   // ── Init ──────────────────────────────────────────────
   buildCards();
   buildProject1();
-  showHome();
+  switchMidtermTab('ai');
+
+  const initHash = (window.location.hash || '').replace('#', '').toLowerCase();
+  if (initHash === 'midterm') showMidterm();
+  else if (initHash === 'project1') showProject1();
+  else if (initHash === 'memorial') showMemorial();
+  else if (initHash === 'english') showEnglish();
+  else if (SPECS[initHash]) showSpec(initHash);
+  else showHome();
 
 })();
