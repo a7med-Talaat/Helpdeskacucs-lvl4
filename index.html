@@ -732,7 +732,7 @@
             <div class="tt-hero-top">
               <div class="tt-brand-group">
                 <div class="tt-brand-icon">
-                  <i class="fa-solid fa-graduation-cap"></i>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                 </div>
                 <div>
                   <h1 class="tt-brand-title">Ahram Canadian University</h1>
@@ -742,11 +742,11 @@
 
               <div class="tt-actions-group">
                 <button id="downloadBtn" onclick="downloadMidtermImage()" class="tt-btn">
-                  <i class="fa-solid fa-file-arrow-down" style="color:#f43f5e;"></i>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   <span>Save Image</span>
                 </button>
                 <button onclick="window.print()" class="tt-btn tt-btn-primary">
-                  <i class="fa-solid fa-print"></i>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
                   <span>Print Timetable</span>
                 </button>
               </div>
@@ -755,16 +755,20 @@
             <!-- Specialization Tabs (AI, CS, SWE, CNE only) -->
             <nav class="tt-nav-bar" aria-label="Timetable Specialization Tabs">
               <button onclick="switchMidtermTab('ai')" id="tab-ai" class="tt-tab-btn tab-ai active">
-                <i class="fa-solid fa-brain"></i><span>AI</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="18" cy="6" r="3"/></svg>
+                <span>AI</span>
               </button>
               <button onclick="switchMidtermTab('cs')" id="tab-cs" class="tt-tab-btn tab-cs">
-                <i class="fa-solid fa-code"></i><span>Computer Science</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span>Computer Science</span>
               </button>
               <button onclick="switchMidtermTab('swe')" id="tab-swe" class="tt-tab-btn tab-swe">
-                <i class="fa-solid fa-layer-group"></i><span>Software Eng.</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span>Software Eng.</span>
               </button>
               <button onclick="switchMidtermTab('cne')" id="tab-cne" class="tt-tab-btn tab-cne">
-                <i class="fa-solid fa-network-wired"></i><span>Networks (CNE)</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span>Networks (CNE)</span>
               </button>
             </nav>
           </header>

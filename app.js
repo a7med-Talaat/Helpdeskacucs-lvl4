@@ -84,14 +84,21 @@
   const themeToggle = document.getElementById('themeToggle');
   const root        = document.documentElement;
 
-  // Load saved theme (default: light)
-  const savedTheme = localStorage.getItem('hd-theme') || 'light';
+  // Load saved theme (default: light) - safe for Brave Shields & incognito
+  let savedTheme = 'light';
+  try {
+    savedTheme = localStorage.getItem('hd-theme') || 'light';
+  } catch (e) {
+    savedTheme = 'light';
+  }
   root.setAttribute('data-theme', savedTheme);
 
   themeToggle.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    localStorage.setItem('hd-theme', next);
+    try {
+      localStorage.setItem('hd-theme', next);
+    } catch (e) {}
   });
 
   // ── Build all cards ───────────────────────────────────
@@ -417,13 +424,22 @@
 
   // ── Midterm Timetable Logic ───────────────────────────
   const MIDTERM_SLOT = "1:00 PM – 2:00 PM";
+  const ICONS_SVG = {
+    ai: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><circle cx="18" cy="6" r="3"/></svg>`,
+    cs: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    swe: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    cne: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    calendar: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+    clock: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
+  };
+
   const midtermSchedules = {
     ai: {
       key: 'ai',
       headerName: "Ahram Canadian University (AI) Midterm Timetable",
       badge: "AI Specialization",
       badgeClass: "badge-ai-spec",
-      icon: "fa-solid fa-brain",
+      iconSvg: ICONS_SVG.ai,
       exams: [
         { date: "02/11/2026", day: "Monday", course: "Machine Learning", time: MIDTERM_SLOT },
         { date: "03/11/2026", day: "Tuesday", course: "Big Data", time: MIDTERM_SLOT },
@@ -437,7 +453,7 @@
       headerName: "Ahram Canadian University (CS) Midterm Timetable",
       badge: "CS Specialization",
       badgeClass: "badge-cs-spec",
-      icon: "fa-solid fa-code",
+      iconSvg: ICONS_SVG.cs,
       exams: [
         { date: "02/11/2026", day: "Monday", course: "Numerical Treatment", time: MIDTERM_SLOT },
         { date: "03/11/2026", day: "Tuesday", course: "HCI", time: MIDTERM_SLOT },
@@ -451,7 +467,7 @@
       headerName: "Ahram Canadian University (SWE) Midterm Timetable",
       badge: "SWE Specialization",
       badgeClass: "badge-swe-spec",
-      icon: "fa-solid fa-layer-group",
+      iconSvg: ICONS_SVG.swe,
       exams: [
         { date: "02/11/2026", day: "Monday", course: "Software Project Management", time: MIDTERM_SLOT },
         { date: "03/11/2026", day: "Tuesday", course: "HCI", time: MIDTERM_SLOT },
@@ -465,7 +481,7 @@
       headerName: "Ahram Canadian University (CNE) Midterm Timetable",
       badge: "CNE Specialization",
       badgeClass: "badge-cne-spec",
-      icon: "fa-solid fa-network-wired",
+      iconSvg: ICONS_SVG.cne,
       exams: [
         { date: "02/11/2026", day: "Monday", course: "New Trends in Computer Networks", time: MIDTERM_SLOT },
         { date: "03/11/2026", day: "Tuesday", course: "Communications Technology", time: MIDTERM_SLOT },
@@ -493,7 +509,7 @@
     const badge = document.getElementById('versionBadge');
     if (badge) {
       badge.className = `tt-spec-badge ${data.badgeClass}`;
-      badge.innerHTML = `<i class="${data.icon}"></i><span>${data.badge}</span>`;
+      badge.innerHTML = `${data.iconSvg}<span>${data.badge}</span>`;
     }
 
     const tbody = document.getElementById('timetableBody');
@@ -505,7 +521,7 @@
           <td class="tt-idx">0${i + 1}</td>
           <td>
             <div class="tt-date-group">
-              <span class="tt-date-icon"><i class="fa-regular fa-calendar"></i></span>
+              <span class="tt-date-icon">${ICONS_SVG.calendar}</span>
               <div>
                 <span class="tt-date-val">${item.date}</span>
                 <span class="tt-date-day">(${item.day})</span>
@@ -517,7 +533,7 @@
           </td>
           <td style="text-align: center;">
             <span class="tt-time-badge">
-              <i class="fa-regular fa-clock"></i>${item.time}
+              ${ICONS_SVG.clock}${item.time}
             </span>
           </td>`;
         tbody.appendChild(tr);
@@ -531,33 +547,34 @@
     const toast = document.getElementById('toastMessage');
     const toastText = document.getElementById('toastText');
     if (!toast || !toastText) return;
-    const icon = toast.querySelector('i');
     toastText.textContent = text;
-    if (isError) {
-      if (icon) { icon.className = 'fa-solid fa-circle-exclamation'; icon.style.color = '#f43f5e'; }
-    } else {
-      if (icon) { icon.className = 'fa-solid fa-circle-check'; icon.style.color = '#10b981'; }
-    }
     toast.classList.add('show');
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
   }
 
-  // Download high-res timetable image
+  // Download high-res timetable image (Fully compatible with Brave Shields)
   async function downloadMidtermImage() {
     const card = document.getElementById('timetableCard');
     if (!card) return;
     showToast('Generating high-resolution image...');
     try {
-      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      if (document.fonts && document.fonts.ready) {
+        await Promise.race([
+          document.fonts.ready,
+          new Promise(r => setTimeout(r, 400))
+        ]);
+      }
       if (typeof html2canvas === 'undefined') {
-        showToast('Image library loading...', true);
+        window.print();
         return;
       }
       const canvas = await html2canvas(card, {
-        scale: 3,
+        scale: 2.5,
         backgroundColor: '#ffffff',
         useCORS: true,
+        allowTaint: true,
+        logging: false,
         windowWidth: 1100,
         onclone: (doc) => {
           doc.documentElement.setAttribute('data-theme', 'light');
@@ -566,13 +583,45 @@
           doc.querySelectorAll('.no-print').forEach(el => el.remove());
         }
       });
+
+      // Brave-safe blob download
+      if (canvas.toBlob) {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            triggerDataUrlDownload(canvas);
+            return;
+          }
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.download = `ACU-${activeMidtermTab.toUpperCase()}-Midterm-Timetable.png`;
+          link.href = url;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(url), 2000);
+          showToast('Image downloaded successfully!');
+        }, 'image/png');
+      } else {
+        triggerDataUrlDownload(canvas);
+      }
+    } catch (err) {
+      console.warn('Canvas export fallback to print:', err);
+      showToast('Opening print dialog for timetable...');
+      window.print();
+    }
+  }
+
+  function triggerDataUrlDownload(canvas) {
+    try {
       const link = document.createElement('a');
       link.download = `ACU-${activeMidtermTab.toUpperCase()}-Midterm-Timetable.png`;
       link.href = canvas.toDataURL('image/png');
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
       showToast('Image downloaded successfully!');
-    } catch (err) {
-      showToast('Error generating image', true);
+    } catch (e) {
+      window.print();
     }
   }
 
